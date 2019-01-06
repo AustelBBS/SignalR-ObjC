@@ -34,7 +34,7 @@
         return nil;
     }
     
-    self.acceptableContentTypes = [NSSet setWithObjects:@"text/event-stream", nil];
+    self.acceptableContentTypes = [NSSet setWithObjects:@"text/event-stream", @"text/html", nil];
     
     return self;
 }
