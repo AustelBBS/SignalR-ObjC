@@ -144,7 +144,12 @@ typedef void (^SRCompletionHandler)(id response, NSError *error);
     
     SRLogSSEDebug(@"serverSentEvents will connect at url: %@", [[request URL] absoluteString]);
     AFHTTPRequestOperation *operation = [[AFHTTPRequestOperation alloc] initWithRequest:request];
-    [operation setResponseSerializer:[SREventSourceResponseSerializer serializer]];
+    //[operation setResponseSerializer:[SREventSourceResponseSerializer serializer]];
+    AFHTTPResponseSerializer *serializer = [AFHTTPResponseSerializer serializer];
+    NSMutableSet *set = [serializer.acceptableContentTypes mutableCopy];
+    [set addObject:@"text/html"];
+    serializer.acceptableContentTypes = [set copy];
+    [operation setResponseSerializer:serializer];
     //operation.shouldUseCredentialStorage = self.shouldUseCredentialStorage;
     //operation.credential = self.credential;
     //operation.securityPolicy = self.securityPolicy;
